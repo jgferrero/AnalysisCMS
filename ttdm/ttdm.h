@@ -7,12 +7,12 @@ const TString datacard_dir    = "/afs/cern.ch/user/j/jgarciaf/www/txt-files/data
 
 
 
-const TString theproduction   = "carlota"; 
+const TString theproduction   = "julia"; 
 const TString histoSite       = "histos/loyola_AN-updating_fig-6-7/"; 
 
 
-//const TString datacard_folder = "mierda/";   // "work/";
-const TString datacard_folder = "carlota_blinded/";   // "work/";
+const TString datacard_folder = "171004_unblinded/";   // "work/";
+//const TString datacard_folder = "carlota_blinded/";   // "work/";
 
 const TString histoSite_datacards = datacard_dir + datacard_folder; //"histos/loyola_sync/"; 
 
@@ -25,7 +25,7 @@ const TString histoSite_datacards = datacard_dir + datacard_folder; //"histos/lo
 const float inicio = 0.00;
 const float paso   = 1.00;
 
-const float thelumi = 35.867/15.; 
+const float thelumi = 35.9; 
 
 const float xs2l = 1.0/9; 
 
@@ -49,8 +49,8 @@ const float elumi   = 0.025;
 
 
 
-//const TCut selection = "metPfType1>80.&&mt2ll>100.&&channel==5";  // sync
-const TCut selection = "(channel==3&&metPfType1>50.)||(channel==4&&metPfType1>50.)||(channel==5&&metPfType1>0.)";//&&darkpt>0."; // hard
+//const TCut selection = "channel==4";
+const TCut selection = "((channel==3&&metPfType1>50.)||(channel==4&&metPfType1>50.)||(channel==5&&metPfType1>0.))";//&&darkpt>0."; // hard
 //const TCut selection = "(channel==3&&metPfType1>80.)||(channel==4&&metPfType1>80.)||(channel==5&&metPfType1>0.)&&mt2ll>80.&&darkpt>-5000";//&&darkpt>0."; // hard
 //const TCut selection = "lep1id*lep2id<0&&metPfType1>50.&&mt2ll>50.";//&&darkpt>0."; // hard
 //const TCut selection = "((channel==3||channel==4)&&metPfType1>50.)||channel==5";   // DESY
@@ -193,11 +193,11 @@ void Assign(){
 	//----------
 
 	processID[ttDM ] = "ttDM0001scalar00500"     ;   //     tune !
-	processID[data ] = "01_Data_1outof15"        ;
-	//processID[data ] = "01_Data_Full2016"        ;
+	//processID[data ] = "01_Data_1outof15"        ;
+	processID[data ] = "01_Data_Full2016"        ;
 	//processID[fakes] = "00_Fakes_1outof15"       ; 
 	processID[fakes] = "00_Fakes_Full2016"       ; 
-	processID[TT   ] = "04_TTTo2L2Nu"        ; 
+	processID[TT   ] = "04_TTTo2L2Nu"    ; 
 	//processID[TT1  ] = "04_TTTo2L2Nu_1"          ;
 	//processID[TT2  ] = "04_TTTo2L2Nu_2"          ;
  	//processID[TTSemi]= "04_TTToSemiLepton"       ;
@@ -352,8 +352,8 @@ void Assign(){
 	eventW[Triggerdo] = "eventW_Triggerdo";
 	eventW[METup    ] = "eventW"          ;
 	eventW[METdo    ] = "eventW"          ;
-	eventW[JESup    ] = "eventW_Btagup*1.01";
-	eventW[JESdo    ] = "eventW_Btagdo*0.99";
+	eventW[JESup    ] = "eventW"          ;
+	eventW[JESdo    ] = "eventW"          ;
 	eventW[EleESup  ] = "eventW"          ;
 	eventW[EleESdo  ] = "eventW"          ;
 	eventW[MuESup   ] = "eventW"          ;
@@ -370,9 +370,9 @@ void Assign(){
 
 		minitreeDir[i] = theproduction;
 
-		if( i >= METup && i <= METdo ) minitreeDir[i] = minitreeDir[i] + "_" + systematicID[i];
+		//if( i >= METup && i <= METdo ) minitreeDir[i] = minitreeDir[i] + "_" + systematicID[i];
 
-		//if( i >= METup && i <= MuESdo ) minitreeDir[i] = minitreeDir[i] + "_" + systematicID[i];
+		if( i >= METup && i <= MuESdo ) minitreeDir[i] = minitreeDir[i] + "_" + systematicID[i];
 
 	}      
 
@@ -405,7 +405,7 @@ void Assign(){
 	b_name[metPfType1Phi] = "metPfType1Phi";         nbinraw[metPfType1Phi]= 200;	lowraw[metPfType1Phi]=  -3.2;	upraw[metPfType1Phi]=   3.2;
 
 	b_name[m2l    ] = "m2l"    ;                     nbinraw[m2l    ]      =3000;	lowraw[m2l    ]      =   0. ;	upraw[m2l    ]      =3000. ;
-	b_name[mt2ll  ] = "mt2ll"  ;                     nbinraw[mt2ll  ]      =3000;	lowraw[mt2ll  ]      =   0. ;	upraw[mt2ll  ]      =3000. ;        
+	b_name[mt2ll  ] = "mt2ll"  ;                     nbinraw[mt2ll  ]      =3000;	lowraw[mt2ll  ]      =   0. ;	upraw[mt2ll  ]      =3000. ;       
 	b_name[mt2lblb] = "mt2lblb";                     nbinraw[mt2lblb]      =3000;	lowraw[mt2lblb]      =   0. ;	upraw[mt2lblb]      =3000. ;
 	b_name[mtw1   ] = "mtw1"   ;                     nbinraw[mtw1   ]      =3000;	lowraw[mtw1   ]      =   0. ;	upraw[mtw1   ]      =3000. ;
 	b_name[mtw2   ] = "mtw2"   ;                     nbinraw[mtw2   ]      =3000;	lowraw[mtw2   ]      =   0. ;	upraw[mtw2   ]      =3000. ;
