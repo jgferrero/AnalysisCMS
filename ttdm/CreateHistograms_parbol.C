@@ -21,35 +21,12 @@ void CreateHistograms_parbol(){
 
 	for(int j = 0; j < nscalar; j++ ){
 
-		if( j != 4 ) continue;
+		//if( j != 0 ) continue;
 
 		cuentita = 0.0; 
 
-		processID[ttDM] = scalarID[j];	b_name[ANN] = "ANN_170904_justMET50SF_" + processID[ttDM];
+		processID[ttDM] = scalarID[j];	b_name[ANN] = "ANN_8080_julia_" + processID[ttDM];
 
-		//pathway = histoSite + processID[ttDM] + "/";	
-		pathway = datacard_dir + datacard_folder + "/" + processID[ttDM] + "/";
-
-		gSystem -> mkdir( pathway, kTRUE );
-		
-
-		/*for( int i = 0; i < nprocess; i++ ){
-
-			if ( i == Wg || i == Zg ) continue; 
-
-			CreateHistograms2( i ); 
-
-		}*/
-
-		cout << "\n\n \t yield total = " << cuentita << endl;
-
-		//if( doshape == 1 ){ AddStatHistograms(); SplitQCDHistograms(); }
-
-		//continue;
-	
-		cuentita = 0.0; 
-
-		processID[ttDM] = pseudoID[j];	b_name[ANN] = "ANN_170904_justMET50SF_" + processID[ttDM]; 
 		//pathway = histoSite + processID[ttDM] + "/";	
 		pathway = datacard_dir + datacard_folder + "/" + processID[ttDM] + "/";
 
@@ -64,8 +41,33 @@ void CreateHistograms_parbol(){
 
 		}
 
-		cout << "\n\n \t yield total = " << cuentita << endl;
+	 	cout << "\n\n \t yield total = " << cuentita << endl;
 
+		if( doshape == 1 ){ AddStatHistograms(); SplitQCDHistograms(); }
+
+	continue;
+	
+		cuentita = 0.0; 
+
+		processID[ttDM] = pseudoID[j];	b_name[ANN] = "ANN_8080_julia_" + processID[ttDM]; 
+
+
+		pathway = datacard_dir + datacard_folder + "/" + processID[ttDM] + "/";
+
+		gSystem -> mkdir( pathway, kTRUE );
+		
+
+		for( int i = 0; i < nprocess; i++ ){
+
+			if ( i == Wg || i == Zg ) continue; 
+
+			CreateHistograms2( i ); 
+
+		}
+
+		//////cout << "\n\n \t yield total = " << cuentita << endl;
+
+		if( doshape == 1 ){ AddStatHistograms(); SplitQCDHistograms(); }
 
 
 	}   // j 
@@ -77,7 +79,7 @@ void CreateHistograms_parbol(){
 
 void CreateHistograms2( int process ){ 
 
-	//if(  process == data || process == fakes || process == TT || process == TTV ) return; 
+	//if(  process == data ) return; 
 
 	//if ( process != WZ ) return;
 
@@ -105,13 +107,13 @@ void CreateHistograms2( int process ){
 
 	for( int k = 0; k <= toppTrwdo; k++ ){ 
 
-		if(  k > nominal ) continue; 
+		if(  k > nominal /*&& ( k < METup || k > METdo )*/ ) continue; 
 
 		//if(  k != METup  && k != METdo ) continue; 
 
 		//if ( processID[process] == "ttDM0001pseudo00010" && k == EleESdo ) continue;  // 1-pseudo-010 (jefferson)     VALUABLE INFORMATION, DO NOT ERASE !!! 
 
-		//if( k >= EleESup && k <= MuESdo ) continue;
+		if( k >= EleESup && k <= MuESdo ) continue;
 		//if( k >= METup   && k <= METdo  ) continue;
 		//if( k >= JESup   && k <= JESdo  ) continue;
 
@@ -167,7 +169,7 @@ void CreateHistograms2( int process ){
 		if ( process == DY    )                    thecut = Form("%4.2f", DYSF   )*thecut; 
                 if ( process == ttDM  )                    thecut = Form("%4.2f", xs2l   )*thecut;
                 if ( process != data && process != fakes ) thecut = Form("%6.3f", thelumi)*thecut;
-                if ( process == data || process == fakes ) thecut = Form("%6.3f", 1./15. )*thecut;
+                //if ( process == fakes )                    thecut = Form("%6.3f", 1./15. )*thecut;
 
 		if( (k >= QCDup && k <= PDFdo) && (process != data && process != ttDM && process != fakes && process != ST ) ){
 
@@ -215,11 +217,11 @@ void CreateHistograms2( int process ){
 		for( int i = 0; i < nhisto; i++ ){
 
 			if(	//i ==  nlepton      ||
-				//i == lep1pt        || 
+					i == lep1pt        || 
 				//i == lep1eta       || 
 				//i == lep1phi       || 
 				//i == lep1mass      ||
-				//i == lep2pt        || 
+					i == lep2pt        || 
 				//i == lep2eta       || 
 				//i == lep2phi       || 
 				//i == lep2mass      || 
@@ -233,7 +235,7 @@ void CreateHistograms2( int process ){
 				//i == jet2mass      ||
 			i == metPfType1    || 
 				//i == metPfType1Phi ||
-				//i == m2l           || 
+					i == m2l           || 
 			i == mt2ll         || 
 				//i == mt2lblb       || 
 				//i == mtw1          || 
@@ -275,7 +277,13 @@ void CreateHistograms2( int process ){
 				//--- 1st approach: TTree::Project()
 				if( i == ANN && doshape == 1 ){
 
-					double cloison[] = {  0.00, 0.30, 0.50, 0.70, 0.80, 0.95, 0.96, 0.97, 0.98, 0.99, 1.00 };
+					double cloison[] = {  0.00, 0.30, 0.50, 0.70, 0.80,
+ 
+						//0.81, 0.82, 0.83, 0.84, 0.85, 0.86, 0.87, 0.88, 0.89, 0.90,
+
+						//0.90, 0.91, 0.92, 0.93, 0.94, 
+
+						0.95, 0.96, 0.97, 0.98, 0.99, 1.00 };
 
 					myhisto[i] = new TH1F(h_name[i], h_name[i], 10, cloison);
 
@@ -330,7 +338,7 @@ void CreateHistograms2( int process ){
 
 					//cout << "\t\t\t" << myhisto[i] -> GetEntries() << "\t\t" << yield << endl; 
 
-					cout << Form("\t\t\t %8.0f \t\t %8.2f", myhisto[i]->GetEntries(), yield) << endl; 
+					cout << Form("\t\t%8.0f\t%8.2f", myhisto[i]->GetEntries(), yield) << endl; 
  
 					if( k == nominal && process != data && process != ttDM ) cuentita += yield;
 

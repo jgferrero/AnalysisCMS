@@ -146,6 +146,7 @@ void GetRelUnc( int process, float threshold ){
 		}*/
 
 
+
 		for( int k = hard; k < nlevel; k++ ){
 
 
@@ -240,7 +241,7 @@ void WriteDatacard( float threshold, TString ttdmID ){
 
 	datacard << "imax 1 number of channels \n" ;
 	datacard << Form( "jmax %d number of backgrounds \n", 9 );//nprocess );
-	datacard << Form( "kmax %d  number of nuisance parameters \n", 112 ); //nsystematic-1 );
+	datacard << Form( "kmax %d  number of nuisance parameters \n", 113 ); //nsystematic-1 );
 	datacard << "------------ \n" ;
 	datacard << "shapes * * simple-shapes-TH1-final.root $PROCESS $PROCESS_$SYSTEMATIC \n";
 	datacard << "--------------- \n";	
@@ -316,7 +317,7 @@ if( ( j == DDtt   || j == DDDY  || j == DDfakes || j == DDttV   || j == pileup |
 			if( j == pileup  && k == shape ) continue; 
 			if( j == luminosity&&k== shape ) continue;*/
 
-if( j >= METup   && j <= METdo  ) continue;
+//if( j >= METup   && j <= METdo  ) continue;
 if( j >= EleESup && j <= MuESdo ) continue; 
 if( j == DDtt )                   continue;
 // if( j == DDDY )                   continue;
@@ -369,7 +370,7 @@ if( j == QCDup)                   continue;
 
 
 
-
+//datacard << "    MET shape     	  1.000    -      1.000   1.000   1.000   1.000   1.000   1.000   1.000   1.000\n";
 datacard << "QCD_signal   shape        1.0      -       -       -       -       -       -       -       -       -\n";
 datacard << "QCD_TTV      shape         -       -       -      1.0      -       -       -       -       -       -\n";
 datacard << "QCD_DY       shape         -       -       -       -      1.0      -       -       -       -       -\n";
@@ -452,7 +453,7 @@ datacard << "ibin_4_stat_ shape         -       -       -       -       -       
 datacard << "ibin_5_stat_ shape         -       -       -       -       -       -       -       -      1.0      -\n";      
 datacard << "ibin_6_stat_ shape         -       -       -       -       -       -       -       -      1.0      -\n";      
 datacard << "ibin_7_stat_ shape         -       -       -       -       -       -       -       -      1.0      -\n";      
-datacard << "ibin_8_stat_ shape         -       -       -       -       -       -       -       -      1.0      -\n";      
+datacard << "ibin_8_stat_ shape         -       -       -       -       -       -       -       -      1.0      -\n";      //
 datacard << "ibin_9_stat_ shape         -       -       -       -       -       -       -       -      1.0      -\n";      
 datacard << "ibin_10_stat_ shape        -       -       -       -       -       -       -       -      1.0      -\n";        
 datacard << "ibin_1_stat_ shape         -       -       -       -       -       -       -       -       -     1.0\n";            
